@@ -6,17 +6,6 @@ Page({
   data: {},
   // Listening lifecycle callback onLoad
   onLoad() {
-    // Get user information and store data
-    app.getUserInfo().then(
-      user => {
-        this.setData({
-          user,
-        });
-      },
-      () => {
-        // Failed to get user information
-      }
-    );
   },
   // Listening lifecycle callback onShow
   onShow() {
@@ -25,12 +14,8 @@ Page({
   },
   // Event handler
   onTodoChanged(e) {
-    // Modify global data
-    const checkedTodos = e.detail.value;
-    app.todos = app.todos.map(todo => ({
-      ...todo,
-      completed: checkedTodos.indexOf(todo.text) > -1,
-    }));
+    const index = e.currentTarget.dataset['index'];
+    app.todos[index].completed = !app.todos[index].completed;
     this.setData({ todos: app.todos });
   },
 
